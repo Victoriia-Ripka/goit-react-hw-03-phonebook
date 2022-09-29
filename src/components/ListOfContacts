@@ -1,0 +1,10 @@
+import React from "react"
+import PropTypes from "prop-types"
+
+export const ListOfContacts = ({contacts}) => {
+    return (
+        <ul>
+            {contacts.map(contact => console.log(contact))}
+        </ul>
+    )
+}
