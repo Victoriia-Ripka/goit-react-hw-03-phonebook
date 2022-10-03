@@ -1,53 +1,46 @@
-import React, { Component } from 'react';
-// import { nanoid } from 'nanoid';
-import PropTypes from 'prop-types';
+import React from 'react'
+import { Formik, Form, Field } from 'formik'
+import { nanoid } from 'nanoid';
+// import PropTypes from 'prop-types'
 
-const INITIAL_STATE = {
-  name: '',
+export const MyContactForm = ({ onSubmit }) => {
+  const initialValues = { name: '', number: '' };
+
+  const handleSubmit = (values, { resetForm }) => {
+    const contact = { id: nanoid(), ...values };
+    resetForm();
+
+    onSubmit(contact);
+  };
+  
+  return (
+    <Formik
+      initialValues={initialValues}
+      onSubmit={handleSubmit}
+    >
+      {props => (
+        <Form>
+          <label>
+            Name
+            <Field
+              type="text"
+              // onChange={e => {
+              //   console.log(e.currentTarget.value)
+              // }} 
+              onBlur={props.handleBlur}
+              value={props.values.name}
+              name="name"
+              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+              required
+            />
+          </label>
+          {props.errors.name && <div id="feedback">{props.errors.name}</div>}
+          <button type="Submit">Add contact</button>
+        </Form>
+      )}
+      {/*value={this.state.name}
+      onChange={this.handleChangeInput}*/}
+    </Formik>
+  );
 };
-
-export class Forma extends Component {
-  static propTypes = {
-    value: PropTypes.string,
-    onSubmit: PropTypes.func,
-  };
-
-  state = {
-    name: '',
-    id: '',
-  };
-
-  // update of state
-  handleChangeInput = e => {
-    this.setState({ name: e.target.value });
-  };
-
-  // submit form
-  handleSubmit = e => {
-    e.preventDefault();
-    // this.setState({id: {nanoid()}})
-    this.props.onSubmit({ ...this.state });
-    this.setState({ ...INITIAL_STATE });
-  };
-
-  render() {
-    // console.log(this.props);
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Name
-          <input
-            type="text"
-            name="contact"
-            value={this.state.name}
-            onChange={this.handleChangeInput}
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            required
-          />
-        </label>
-        <button type="Submit">Add contact</button>
-      </form>
-    );
-  }
-}
