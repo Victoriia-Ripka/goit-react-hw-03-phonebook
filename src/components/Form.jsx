@@ -1,5 +1,5 @@
-import React from 'react'
-import { Formik, Form, Field } from 'formik'
+import React from 'react';
+import { Formik, Form, Field } from 'formik';
 import { nanoid } from 'nanoid';
 // import PropTypes from 'prop-types'
 
@@ -8,25 +8,19 @@ export const MyContactForm = ({ onSubmit }) => {
 
   const handleSubmit = (values, { resetForm }) => {
     const contact = { id: nanoid(), ...values };
+    // console.log(contact)
     resetForm();
-
     onSubmit(contact);
   };
-  
+
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={handleSubmit}
-    >
+    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
       {props => (
         <Form>
           <label>
             Name
             <Field
               type="text"
-              // onChange={e => {
-              //   console.log(e.currentTarget.value)
-              // }} 
               onBlur={props.handleBlur}
               value={props.values.name}
               name="name"
@@ -35,12 +29,23 @@ export const MyContactForm = ({ onSubmit }) => {
               required
             />
           </label>
-          {props.errors.name && <div id="feedback">{props.errors.name}</div>}
+          <br/>
+          <label>
+            Number
+            <Field
+              type="tel"
+              onBlur={props.handleBlur}
+              value={props.values.number}
+              name="number"
+              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+              required
+            />
+          </label>
+          <br/>
           <button type="Submit">Add contact</button>
         </Form>
       )}
-      {/*value={this.state.name}
-      onChange={this.handleChangeInput}*/}
     </Formik>
   );
 };

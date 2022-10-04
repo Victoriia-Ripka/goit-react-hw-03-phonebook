@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 export const ListOfContacts = ({ contacts, onDeleteBtn }) => {
   return (
     <ul>
-      {contacts.map(contact => {
-        const { name, id } = contact;
+      {contacts.map(item => {
+        const { name, number, id } = item;
         return (
           <li key={id}>
-            <p>{name}</p>
+            <p>{name}: {number}</p>
           </li>
         );
       })}
@@ -20,7 +20,8 @@ ListOfContacts.propTypes = {
   contacts: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
     }).isRequired
   ),
 };
