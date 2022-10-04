@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
-import { MyContactForm } from './Form';
-import { Section } from './Section';
-import { ListOfContacts } from './ListOfContacts';
-import { Filter } from './Filter';
-// import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import { MyContactForm } from './Form'
+import { Section } from './Section'
+import { ListOfContacts } from './ListOfContacts'
+import { Filter } from './Filter'
 
 export class App extends Component {
   state = {
@@ -17,13 +16,18 @@ export class App extends Component {
   };
 
   hanlerSubmitForm = contact => {
-    this.setState(prevState => ({
-      contacts: [...prevState.contacts, contact],
-    }));
+    const a = this.state.contacts.find(item => item.name === contact.name)
+    if (!a) {
+      this.setState(prevState => ({
+        contacts: [...prevState.contacts, contact],
+      }));
+    } else {
+      alert(`${contact.name} is already in contacts`)
+    }
   };
 
   filterContacts = e => {
-    this.setState({ filter: e.currentTarget.value });
+    this.setState({ filter: e.currentTarget.value })
   };
 
   render() {

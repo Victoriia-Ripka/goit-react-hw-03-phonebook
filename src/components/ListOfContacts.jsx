@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
 export const ListOfContacts = ({ contacts }) => {
   return (
@@ -12,11 +12,11 @@ export const ListOfContacts = ({ contacts }) => {
               {name}: {number}
             </p>
           </li>
-        );
+        )
       })}
     </ul>
-  );
-};
+  )
+}
 
 ListOfContacts.propTypes = {
   contacts: PropTypes.arrayOf(
@@ -26,4 +26,4 @@ ListOfContacts.propTypes = {
       number: PropTypes.string.isRequired,
     })
   ),
-};
+}

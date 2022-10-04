@@ -1,19 +1,35 @@
-import React from 'react';
-import { Formik, Form, Field } from 'formik';
-import { nanoid } from 'nanoid';
+import React from 'react'
+import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { nanoid } from 'nanoid'
 import PropTypes from 'prop-types'
+import * as Yup from 'yup'
+
+const SignupSchema = Yup.object().shape({
+  name: Yup.string()
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
+  number: Yup.string()
+    .min(9, 'Too Short!')
+    .max(20, 'Too Long!')
+    .required('Required'),
+})
 
 export const MyContactForm = ({ onSubmit }) => {
-  const initialValues = { name: '', number: '' };
+  const initialValues = { name: '', number: '' }
 
   const handleSubmit = (values, { resetForm }) => {
-    const contact = { id: nanoid(), ...values };
-    resetForm();
-    onSubmit(contact);
-  };
+    const contact = { id: nanoid(), ...values }
+    resetForm()
+    onSubmit(contact)
+  }
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={handleSubmit}
+      validationSchema={SignupSchema}
+    >
       {props => (
         <Form>
           <label>
@@ -26,6 +42,7 @@ export const MyContactForm = ({ onSubmit }) => {
               title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
               required
             />
+            <ErrorMessage name="name" />
           </label>
           <br />
           <label>
@@ -38,14 +55,15 @@ export const MyContactForm = ({ onSubmit }) => {
               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
               required
             />
+            <ErrorMessage name="number" />
           </label>
           <br />
           <button type="Submit">Add contact</button>
         </Form>
       )}
     </Formik>
-  );
-};
+  )
+}
 
 MyContactForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
