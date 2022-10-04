@@ -1,7 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-export const ListOfContacts = ({ contacts }) => {
+export const ListOfContacts = ({ contacts, deleteContact }) => {
   return (
     <ul>
       {contacts.map(item => {
@@ -11,12 +11,15 @@ export const ListOfContacts = ({ contacts }) => {
             <p>
               {name}: {number}
             </p>
+            <button value={id} onClick={deleteContact} type="button">
+              Delete
+            </button>
           </li>
-        )
+        );
       })}
     </ul>
-  )
-}
+  );
+};
 
 ListOfContacts.propTypes = {
   contacts: PropTypes.arrayOf(
@@ -26,4 +29,5 @@ ListOfContacts.propTypes = {
       number: PropTypes.string.isRequired,
     })
   ),
-}
+  deleteContact: PropTypes.func.isRequired,
+};
