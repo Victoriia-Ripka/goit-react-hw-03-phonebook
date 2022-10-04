@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 export const Filter = ({ onChange, value }) => {
   return (
@@ -8,4 +8,9 @@ export const Filter = ({ onChange, value }) => {
       <input type="text" onChange={onChange} value={value} name="filter" />
     </label>
   );
+};
+
+Filter.propTypes = {
+    onChange: PropTypes.func,
+    value: PropTypes.string,
 };

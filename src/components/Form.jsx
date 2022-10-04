@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import { nanoid } from 'nanoid';
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 
 export const MyContactForm = ({ onSubmit }) => {
   const initialValues = { name: '', number: '' };
@@ -46,3 +46,7 @@ export const MyContactForm = ({ onSubmit }) => {
     </Formik>
   );
 };
+
+MyContactForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+}
