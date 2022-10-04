@@ -8,7 +8,6 @@ export const MyContactForm = ({ onSubmit }) => {
 
   const handleSubmit = (values, { resetForm }) => {
     const contact = { id: nanoid(), ...values };
-    // console.log(contact)
     resetForm();
     onSubmit(contact);
   };
@@ -21,7 +20,6 @@ export const MyContactForm = ({ onSubmit }) => {
             Name
             <Field
               type="text"
-              onBlur={props.handleBlur}
               value={props.values.name}
               name="name"
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -29,12 +27,11 @@ export const MyContactForm = ({ onSubmit }) => {
               required
             />
           </label>
-          <br/>
+          <br />
           <label>
             Number
             <Field
               type="tel"
-              onBlur={props.handleBlur}
               value={props.values.number}
               name="number"
               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -42,7 +39,7 @@ export const MyContactForm = ({ onSubmit }) => {
               required
             />
           </label>
-          <br/>
+          <br />
           <button type="Submit">Add contact</button>
         </Form>
       )}

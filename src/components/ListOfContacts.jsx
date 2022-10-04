@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const ListOfContacts = ({ contacts, onDeleteBtn }) => {
+export const ListOfContacts = ({ contacts }) => {
   return (
     <ul>
       {contacts.map(item => {
         const { name, number, id } = item;
         return (
           <li key={id}>
-            <p>{name}: {number}</p>
+            <p>
+              {name}: {number}
+            </p>
           </li>
         );
       })}
