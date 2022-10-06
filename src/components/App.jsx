@@ -15,8 +15,23 @@ export class App extends Component {
     filter: '',
   };
 
+  componentDidMount() {
+    const elements = JSON.parse(localStorage.getItem('contacts'));
+    if (elements) {
+      this.setState({ contacts: elements });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+
   hanlerSubmitForm = contact => {
-    const a = this.state.contacts.find(item => item.name.toLocaleLowerCase() === contact.name.toLocaleLowerCase());
+    const a = this.state.contacts.find(
+      item => item.name.toLocaleLowerCase() === contact.name.toLocaleLowerCase()
+    );
     if (!a) {
       this.setState(prevState => ({
         contacts: [...prevState.contacts, contact],
@@ -31,8 +46,10 @@ export class App extends Component {
   };
 
   deleteContact = e => {
-    let filteredArray = this.state.contacts.filter(item => item.id !== e.target.value)
-    this.setState({contacts: [...filteredArray]});
+    let filteredArray = this.state.contacts.filter(
+      item => item.id !== e.target.value
+    );
+    this.setState({ contacts: [...filteredArray] });
   };
 
   render() {
