@@ -16,7 +16,7 @@ export class App extends Component {
   };
 
   hanlerSubmitForm = contact => {
-    const a = this.state.contacts.find(item => item.name === contact.name);
+    const a = this.state.contacts.find(item => item.name.toLocaleLowerCase() === contact.name.toLocaleLowerCase());
     if (!a) {
       this.setState(prevState => ({
         contacts: [...prevState.contacts, contact],
