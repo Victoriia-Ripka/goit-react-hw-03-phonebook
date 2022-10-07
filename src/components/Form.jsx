@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { nanoid } from 'nanoid'
 import PropTypes from 'prop-types'
 import * as Yup from 'yup'
+import { Label, DeleteBtn } from './styles.styled'
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
@@ -32,7 +33,7 @@ export const MyContactForm = ({ onSubmit }) => {
     >
       {props => (
         <Form>
-          <label>
+          <Label>
             Name
             <Field
               type="text"
@@ -43,9 +44,9 @@ export const MyContactForm = ({ onSubmit }) => {
               required
             />
             <ErrorMessage name="name" />
-          </label>
+          </Label>
           <br />
-          <label>
+          <Label>
             Number
             <Field
               type="tel"
@@ -56,9 +57,9 @@ export const MyContactForm = ({ onSubmit }) => {
               required
             />
             <ErrorMessage name="number" />
-          </label>
+          </Label>
           <br />
-          <button type="Submit">Add contact</button>
+          <DeleteBtn type="Submit">Add contact</DeleteBtn>
         </Form>
       )}
     </Formik>
